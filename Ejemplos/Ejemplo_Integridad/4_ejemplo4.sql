@@ -1,4 +1,3 @@
-
 USE Ejemplo_Integridad_DB
 
 GO
@@ -30,4 +29,3 @@ VALUES
 (7, 'Cecilia', 100) --100 no existe
 
 --The INSERT statement conflicted with the FOREIGN KEY constraint "FK__Personas__Id_Lug__1AD3FDA4". The conflict occurred in database "Ejemplo_Integridad_DB", table "dbo.Localidades", column 'Id'.
-
