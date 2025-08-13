@@ -1,17 +1,22 @@
--- seleccionado base de datos
 
-USE Ejemplo_Integridad_DB
-
-GO
-
--- limpiando las tablas
-DROP TABLE IF EXISTS Personas
-DROP TABLE IF EXISTS Localidades
+USE master;
 
 GO
 
-CREATE TABLE Localidades
-(
+DROP DATABASE IF EXISTS Ejemplo_Integridad_DB;
+
+GO
+
+CREATE DATABASE Ejemplo_Integridad_DB;
+
+GO
+
+USE Ejemplo_Integridad_DB;
+
+
+GO
+
+CREATE TABLE Localidades(
   Id INT PRIMARY KEY,
   Nombre VARCHAR(100) NOT NULL
 )
@@ -32,21 +37,21 @@ CREATE TABLE Personas
   Id INT PRIMARY KEY,
   Nombre VARCHAR(100) NOT NULL,
   Id_LugarNacimiento INT NOT NULL,
- CONSTRAINT  FK_Personas_Id_LugarNacimiento 
-        FOREIGN KEY (Id_LugarNacimiento) 
-        REFERENCES Localidades(Id)
-)
+  CONSTRAINT FK_Localidades_PERSONAS
+  FOREIGN KEY (Id_LugarNacimiento)
+  REFERENCES Localidades(Id)
+);
 
 GO
 
-INSERT INTO Personas(Id, Nombre, Id_LugarNacimiento)
+INSERT INTO personas(Id, Nombre, Id_LugarNacimiento)
 VALUES
-(1, 'Daniel', 1),
-(2, 'Andres', 2),
+(1, 'Daniela', 1),
+(2, 'Andrés', 2),
 (3, 'Daniela', 2),
 (4, 'Andrés', 1),
 (5, 'Armando', 1),
-(6, 'Arturo', 3)
+(6, 'Arturo', 3); 
 
 --Consultando el listado de nombres y su lugar de nacimiento
 

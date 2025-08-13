@@ -1,13 +1,17 @@
 -- seleccionado bases de datos
 
-USE Ejemplo_Integridad_DB
+USE master;
+
+DROP DATABASE IF EXISTS Ejemplo_Integridad_DB
 
 GO
 
--- limpiando las tablas
+CREATE DATABASE Ejemplo_Integridad_DB
 
-DROP TABLE IF EXISTS Localidades
-DROP TABLE IF EXISTS Personas
+GO
+
+USE Ejemplo_Integridad_DB
+
 
 GO
 

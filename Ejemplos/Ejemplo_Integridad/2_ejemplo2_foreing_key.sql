@@ -1,29 +1,55 @@
--- seleccionado base de datos
 
-USE Ejemplo_Integridad_DB
-
-GO
-
--- limpiando las tablas
-DROP TABLE IF EXISTS Personas
+USE master;
 
 GO
 
-/*
-CREATE TABLE Personas
+DROP DATABASE IF EXISTS Ejemplo_Integridad_DB;
+
+GO
+
+CREATE DATABASE Ejemplo_Integridad_DB;
+
+GO
+
+USE Ejemplo_Integridad_DB;
+
+
+GO
+
+CREATE TABLE Localidades
 (
   Id INT PRIMARY KEY,
-  Nombre VARCHAR(100),
-  Id_LugarNacimiento INT REFERENCES Localidades(ID)
+  Nombre VARCHAR(100)
 )
-*/
+
+GO
+
+INSERT INTO Localidades(Id, Nombre)
+VALUES
+(1, 'Parana'),
+(2, 'La Paz'),
+(3, 'Hernandarias'),
+(4, 'Hasenkamp');
+
+GO
+
+
+-- CREATE TABLE Personas
+-- (
+--   Id INT PRIMARY KEY,
+--   Nombre VARCHAR(100),
+--   Id_LugarNacimiento INT REFERENCES Localidades(ID)
+-- )
+
 
 CREATE TABLE Personas
 (
   Id INT PRIMARY KEY,
   Nombre VARCHAR(100),
   Id_LugarNacimiento INT,
-  CONSTRAINT  FK_Personas_Id_LugarNacimiento FOREIGN KEY (Id_LugarNacimiento) REFERENCES Localidades(Id)
+  CONSTRAINT  FK_Personas_Localidades 
+  FOREIGN KEY (Id_LugarNacimiento) 
+  REFERENCES Localidades(Id)
 )
 
 GO
@@ -36,3 +62,12 @@ VALUES
 (4, 'Andrés', 1),
 (5, 'Armando', 1),
 (6, 'Arturo', 3)
+
+
+--Consultando el listado de nombres y su lugar de nacimiento
+
+SELECT p.Id, p.Nombre, l.Nombre AS LugarNacimiento
+FROM Personas p
+INNER JOIN Localidades l
+    ON p.Id_LugarNacimiento = l.Id
+ORDER BY L.Nombre
